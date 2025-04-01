@@ -1,8 +1,4 @@
-interface TopicShowPageProps {
-  readonly slug: string;
-}
-
-export default function TopicShowPage(props: TopicShowPageProps) {
-  const { slug } = props;
-  return <div>Topic Show: {slug}</div>;
+export default function TopicShowPage() {
+  
+  return <div>Topic Show</div>;
 }
