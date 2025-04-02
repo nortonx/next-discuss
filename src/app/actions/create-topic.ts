@@ -26,6 +26,8 @@ export async function createTopic(
     formState: CreateTopicFormState,
     formData: FormData
 ): Promise<CreateTopicFormState> {
+  await new Promise(resolve => setTimeout(resolve, 1500));
+
   const result = createTopicSchema.safeParse({
     name: formData.get("name"),
     description: formData.get("description")
@@ -38,7 +40,7 @@ export async function createTopic(
   }
 
   const session = await auth();
-  if (!session || !session.user) {
+  if (!session?.user) {
     return {
       errors: {
         _form: ["You must be signed in to do this."]
@@ -68,8 +70,6 @@ export async function createTopic(
         }
       }
     }
-  } finally {
-
   }
 
   revalidatePath("/");
