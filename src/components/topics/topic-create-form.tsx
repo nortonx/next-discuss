@@ -7,13 +7,16 @@ import {
   Textarea,
   Popover,
   PopoverTrigger,
-  PopoverContent
+  PopoverContent,
+  Form,
 } from "@nextui-org/react";
 
 import * as actions from "@/app/actions";
+import FormButton from "@/components/common/form-button";
+
 
 export default function TopicCreateForm() {
-  const [formState, action] = useActionState(actions.createTopic, {
+  const [formState, action, isPending] = useActionState(actions.createTopic, {
     errors: {}
   });
 
@@ -31,7 +34,7 @@ export default function TopicCreateForm() {
         <Button color="primary">Create a topic</Button>
       </PopoverTrigger>
       <PopoverContent>
-        <form onSubmit={handleSubmit} noValidate>
+        <Form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4 p-4 2-80">
             <h3 className="text-lg">Create a topic</h3>
             <Input
@@ -57,9 +60,9 @@ export default function TopicCreateForm() {
                 </div>
               ) : null }
 
-            <Button type="submit">Submit</Button>
+            <FormButton isLoading={isPending}>Save</FormButton>
           </div>
-        </form>
+        </Form>
       </PopoverContent>
     </Popover>
   )
